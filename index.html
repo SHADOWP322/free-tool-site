@@ -428,47 +428,21 @@ background:#020617;
 </div>
 
 
-<div class="card">
-<h3>مولد UUID</h3>
-<button onclick="generateUUID()">إنشاء</button>
-<div id="uuidResult" class="result"></div>
-</div>
-
-<div class="card">
-<h3>حاسبة الخصم</h3>
-<input type="number" id="price" placeholder="السعر">
-<input type="number" id="discount" placeholder="نسبة الخصم">
-<button onclick="discountCalc()">احسب</button>
-<div id="discountResult" class="result"></div>
-</div>
-
-<div class="card">
-<h3>تحويل Base64</h3>
-<textarea id="base64Text"></textarea>
-<button onclick="convertBase64()">تحويل</button>
-<div id="base64Result" class="result"></div>
-</div>
-
-<div class="card">
-<h3>مولد Lorem Ipsum</h3>
-<button onclick="generateLorem()">إنشاء</button>
-<div id="loremResult" class="result"></div>
-</div>
-
-<div class="card">
-<h3>حاسبة القروض</h3>
-<input type="number" id="loanAmount" placeholder="قيمة القرض">
-<input type="number" id="loanRate" placeholder="الفائدة %">
-<button onclick="loanCalc()">احسب</button>
-<div id="loanResult" class="result"></div>
-</div>
-
-<div class="card">
-<h3>عكس النص</h3>
-<textarea id="reverseText"></textarea>
-<button onclick="reverseTextFunc()">اعكس</button>
-<div id="reverseResult" class="result"></div>
-</div>
+<div class="card"><h3>مولد UUID</h3><button onclick="generateUUID()">إنشاء</button><div id="uuidResult" class="result"></div></div>
+<div class="card"><h3>حاسبة الخصم</h3><input id="price"><input id="discount"><button onclick="discountCalc()">احسب</button><div id="discountResult" class="result"></div></div>
+<div class="card"><h3>تحويل Base64</h3><textarea id="base64Text"></textarea><button onclick="convertBase64()">تحويل</button><div id="base64Result" class="result"></div></div>
+<div class="card"><h3>عكس النص</h3><textarea id="reverseText"></textarea><button onclick="reverseTextFunc()">اعكس</button><div id="reverseResult" class="result"></div></div>
+<div class="card"><h3>مولد رقم عشوائي</h3><button onclick="randomNumber()">إنشاء</button><div id="randomResult" class="result"></div></div>
+<div class="card"><h3>رمي العملة</h3><button onclick="flipCoin()">ارمِ</button><div id="coinResult" class="result"></div></div>
+<div class="card"><h3>تحويل لأحرف صغيرة</h3><textarea id="lowerText"></textarea><button onclick="lowerCaseText()">تحويل</button><div id="lowerResult" class="result"></div></div>
+<div class="card"><h3>الجذر التربيعي</h3><input id="sqrtNum"><button onclick="sqrtCalc()">احسب</button><div id="sqrtResult" class="result"></div></div>
+<div class="card"><h3>مربع الرقم</h3><input id="squareNum"><button onclick="squareCalc()">احسب</button><div id="squareResult" class="result"></div></div>
+<div class="card"><h3>تحويل KM إلى Miles</h3><input id="kmInput"><button onclick="kmToMiles()">تحويل</button><div id="kmResult" class="result"></div></div>
+<div class="card"><h3>الوقت الحالي</h3><button onclick="showTime()">عرض</button><div id="timeResult" class="result"></div></div>
+<div class="card"><h3>مولد إيميل مؤقت</h3><button onclick="fakeEmail()">إنشاء</button><div id="emailResult" class="result"></div></div>
+<div class="card"><h3>مولد رقم PIN</h3><button onclick="pinGen()">إنشاء</button><div id="pinResult" class="result"></div></div>
+<div class="card"><h3>حساب طول النص</h3><textarea id="lenText"></textarea><button onclick="textLen()">احسب</button><div id="lenResult" class="result"></div></div>
+<div class="card"><h3>تحويل HEX لون</h3><button onclick="hexColor()">إنشاء</button><div id="hexResult" class="result"></div></div>
 
 </section>
 
@@ -683,42 +657,21 @@ document.body.classList.add("dark");
 }
 
 
-function generateUUID(){
-let uuid='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
-let r=Math.random()*16|0;
-let v=c=='x'?r:(r&0x3|0x8);
-return v.toString(16);
-});
-document.getElementById("uuidResult").innerText=uuid;
-}
-
-function discountCalc(){
-let price=parseFloat(document.getElementById("price").value);
-let discount=parseFloat(document.getElementById("discount").value);
-let finalPrice=price-(price*discount/100);
-document.getElementById("discountResult").innerText="السعر بعد الخصم: "+finalPrice.toFixed(2);
-}
-
-function convertBase64(){
-let text=document.getElementById("base64Text").value;
-document.getElementById("base64Result").innerText=btoa(text);
-}
-
-function generateLorem(){
-document.getElementById("loremResult").innerText="Lorem ipsum dolor sit amet consectetur adipisicing elit.";
-}
-
-function loanCalc(){
-let amount=parseFloat(document.getElementById("loanAmount").value);
-let rate=parseFloat(document.getElementById("loanRate").value);
-let total=amount+(amount*rate/100);
-document.getElementById("loanResult").innerText="الإجمالي: "+total.toFixed(2);
-}
-
-function reverseTextFunc(){
-let text=document.getElementById("reverseText").value;
-document.getElementById("reverseResult").innerText=text.split("").reverse().join("");
-}
+function generateUUID(){uuidResult.innerText='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>((Math.random()*16|0)&(c=='x'?15:3)|8).toString(16));}
+function discountCalc(){let p=parseFloat(price.value)||0,d=parseFloat(discount.value)||0;discountResult.innerText=(p-p*d/100).toFixed(2);}
+function convertBase64(){base64Result.innerText=btoa(base64Text.value);}
+function reverseTextFunc(){reverseResult.innerText=reverseText.value.split('').reverse().join('');}
+function randomNumber(){randomResult.innerText=Math.floor(Math.random()*100000);}
+function flipCoin(){coinResult.innerText=Math.random()<0.5?'صورة':'كتابة';}
+function lowerCaseText(){lowerResult.innerText=lowerText.value.toLowerCase();}
+function sqrtCalc(){sqrtResult.innerText=Math.sqrt(parseFloat(sqrtNum.value)||0).toFixed(2);}
+function squareCalc(){let n=parseFloat(squareNum.value)||0;squareResult.innerText=n*n;}
+function kmToMiles(){kmResult.innerText=((parseFloat(kmInput.value)||0)*0.621371).toFixed(2);}
+function showTime(){timeResult.innerText=new Date().toLocaleTimeString();}
+function fakeEmail(){emailResult.innerText='user'+Math.floor(Math.random()*9999)+'@mail.com';}
+function pinGen(){pinResult.innerText=Math.floor(1000+Math.random()*9000);}
+function textLen(){lenResult.innerText=lenText.value.length;}
+function hexColor(){let c='#'+Math.floor(Math.random()*16777215).toString(16);hexResult.innerHTML='<div style="height:40px;background:'+c+'"></div>'+c;}
 
 </script>
 
