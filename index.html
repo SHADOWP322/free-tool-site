@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أدواتي المجانية</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+header{
+background:#0f172a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+header h1{
+font-size:32px;
+}
+
+.hero{
+padding:50px 20px;
+text-align:center;
+}
+
+.hero h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#666;
+}
+
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+padding:30px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card h3{
+margin-bottom:15px;
+color:#0f172a;
+}
+
+textarea,input{
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.result{
+margin-top:10px;
+font-weight:bold;
+color:#111827;
+word-wrap:break-word;
+}
+
+footer{
+background:#0f172a;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>أدواتي المجانية</h1>
+<p>أفضل الأدوات المجانية أونلاين</p>
+</header>
+
+<section class="hero">
+<h2>كل الأدوات التي تحتاجها في مكان واحد</h2>
+<p>مجانية وسريعة وتعمل داخل المتصفح</p>
+</section>
+
+<section class="tools">
+
+<div class="card">
+<h3>مولد كلمات المرور</h3>
+<button onclick="generatePassword()">إنشاء كلمة مرور</button>
+<div class="result" id="passwordResult"></div>
+</div>
+
+<div class="card">
+<h3>عداد الكلمات</h3>
+<textarea id="wordText"></textarea>
+<button onclick="countWords()">احسب</button>
+<div class="result" id="wordResult"></div>
+</div>
+
+<div class="card">
+<h3>عداد الحروف</h3>
+<textarea id="charText"></textarea>
+<button onclick="countChars()">احسب</button>
+<div class="result" id="charResult"></div>
+</div>
+
+<div class="card">
+<h3>تحويل النص إلى أحرف كبيرة</h3>
+<textarea id="upperText"></textarea>
+<button onclick="convertUpper()">تحويل</button>
+<div class="result" id="upperResult"></div>
+</div>
+
+<div class="card">
+<h3>إزالة التكرار من النص</h3>
+<textarea id="duplicateText"></textarea>
+<button onclick="removeDuplicates()">إزالة</button>
+<div class="result" id="duplicateResult"></div>
+</div>
+
+<div class="card">
+<h3>إنشاء QR Code</h3>
+<input type="text" id="qrInput" placeholder="اكتب رابط أو نص">
+<button onclick="generateQR()">إنشاء</button>
+<div id="qrResult"></div>
+</div>
+
+</section>
+
+<footer>
+جميع الحقوق محفوظة © 2026
+</footer>
+
+<script>
+
+function generatePassword(){
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
+let pass="";
+for(let i=0;i<12;i++){
+pass+=chars.charAt(Math.floor(Math.random()*chars.length));
+}
+document.getElementById("passwordResult").innerText=pass;
+}
+
+function countWords(){
+let text=document.getElementById("wordText").value.trim();
+let count=text ? text.split(/\s+/).length : 0;
+document.getElementById("wordResult").innerText="عدد الكلمات: "+count;
+}
+
+function countChars(){
+let text=document.getElementById("charText").value;
+document.getElementById("charResult").innerText="عدد الحروف: "+text.length;
+}
+
+function convertUpper(){
+let text=document.getElementById("upperText").value;
+document.getElementById("upperResult").innerText=text.toUpperCase();
+}
+
+function removeDuplicates(){
+let text=document.getElementById("duplicateText").value;
+let lines=text.split("\n");
+let unique=[...new Set(lines)];
+document.getElementById("duplicateResult").innerText=unique.join("\n");
+}
+
+function generateQR(){
+let value=document.getElementById("qrInput").value;
+document.getElementById("qrResult").innerHTML=
+`<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(value)}">`;
+}
+
+</script>
+
+</body>
+</html>
