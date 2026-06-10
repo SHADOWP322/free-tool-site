@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://free-tool-site-git-main-eyad-s-projects9.vercel.app/sitemap.xml
