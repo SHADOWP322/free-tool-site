@@ -427,6 +427,49 @@ background:#020617;
 <div id="colorResult" class="result"></div>
 </div>
 
+
+<div class="card">
+<h3>مولد UUID</h3>
+<button onclick="generateUUID()">إنشاء</button>
+<div id="uuidResult" class="result"></div>
+</div>
+
+<div class="card">
+<h3>حاسبة الخصم</h3>
+<input type="number" id="price" placeholder="السعر">
+<input type="number" id="discount" placeholder="نسبة الخصم">
+<button onclick="discountCalc()">احسب</button>
+<div id="discountResult" class="result"></div>
+</div>
+
+<div class="card">
+<h3>تحويل Base64</h3>
+<textarea id="base64Text"></textarea>
+<button onclick="convertBase64()">تحويل</button>
+<div id="base64Result" class="result"></div>
+</div>
+
+<div class="card">
+<h3>مولد Lorem Ipsum</h3>
+<button onclick="generateLorem()">إنشاء</button>
+<div id="loremResult" class="result"></div>
+</div>
+
+<div class="card">
+<h3>حاسبة القروض</h3>
+<input type="number" id="loanAmount" placeholder="قيمة القرض">
+<input type="number" id="loanRate" placeholder="الفائدة %">
+<button onclick="loanCalc()">احسب</button>
+<div id="loanResult" class="result"></div>
+</div>
+
+<div class="card">
+<h3>عكس النص</h3>
+<textarea id="reverseText"></textarea>
+<button onclick="reverseTextFunc()">اعكس</button>
+<div id="reverseResult" class="result"></div>
+</div>
+
 </section>
 
 <section class="stats">
@@ -637,6 +680,44 @@ localStorage.setItem("theme","light");
 
 if(localStorage.getItem("theme")==="dark"){
 document.body.classList.add("dark");
+}
+
+
+function generateUUID(){
+let uuid='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+let r=Math.random()*16|0;
+let v=c=='x'?r:(r&0x3|0x8);
+return v.toString(16);
+});
+document.getElementById("uuidResult").innerText=uuid;
+}
+
+function discountCalc(){
+let price=parseFloat(document.getElementById("price").value);
+let discount=parseFloat(document.getElementById("discount").value);
+let finalPrice=price-(price*discount/100);
+document.getElementById("discountResult").innerText="السعر بعد الخصم: "+finalPrice.toFixed(2);
+}
+
+function convertBase64(){
+let text=document.getElementById("base64Text").value;
+document.getElementById("base64Result").innerText=btoa(text);
+}
+
+function generateLorem(){
+document.getElementById("loremResult").innerText="Lorem ipsum dolor sit amet consectetur adipisicing elit.";
+}
+
+function loanCalc(){
+let amount=parseFloat(document.getElementById("loanAmount").value);
+let rate=parseFloat(document.getElementById("loanRate").value);
+let total=amount+(amount*rate/100);
+document.getElementById("loanResult").innerText="الإجمالي: "+total.toFixed(2);
+}
+
+function reverseTextFunc(){
+let text=document.getElementById("reverseText").value;
+document.getElementById("reverseResult").innerText=text.split("").reverse().join("");
 }
 
 </script>
