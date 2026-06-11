@@ -306,7 +306,7 @@ background:#020617;
 </header>
 
 <div class="search-box">
-<input type="text" placeholder="ابحث عن أداة...">
+<input type="text" id="searchInput" placeholder="ابحث عن أداة..." onkeyup="searchTools()">
 </div>
 
 <div class="ad-box">
@@ -443,6 +443,13 @@ background:#020617;
 <div class="card"><h3>مولد رقم PIN</h3><button onclick="pinGen()">إنشاء</button><div id="pinResult" class="result"></div></div>
 <div class="card"><h3>حساب طول النص</h3><textarea id="lenText"></textarea><button onclick="textLen()">احسب</button><div id="lenResult" class="result"></div></div>
 <div class="card"><h3>تحويل HEX لون</h3><button onclick="hexColor()">إنشاء</button><div id="hexResult" class="result"></div></div>
+
+
+<div class="card"><h3>تحويل Celsius إلى Fahrenheit</h3><input id="celsius" placeholder="درجة مئوية"><button onclick="cToF()">تحويل</button><div id="celsiusResult" class="result"></div></div>
+<div class="card"><h3>مولد SHA-256</h3><input id="shaText" placeholder="اكتب النص"><button onclick="sha256Tool()">توليد</button><div id="shaResult" class="result"></div></div>
+<div class="card"><h3>تحويل KG إلى LB</h3><input id="kgInput" placeholder="كيلوجرام"><button onclick="kgToLb()">تحويل</button><div id="kgResult" class="result"></div></div>
+<div class="card"><h3>ترتيب النص أبجدياً</h3><textarea id="sortText"></textarea><button onclick="sortLines()">ترتيب</button><div id="sortResult" class="result"></div></div>
+<div class="card"><h3>إزالة المسافات الزائدة</h3><textarea id="spaceText"></textarea><button onclick="trimSpaces()">تنظيف</button><div id="spaceResult" class="result"></div></div>
 
 </section>
 
@@ -672,6 +679,20 @@ function fakeEmail(){emailResult.innerText='user'+Math.floor(Math.random()*9999)
 function pinGen(){pinResult.innerText=Math.floor(1000+Math.random()*9000);}
 function textLen(){lenResult.innerText=lenText.value.length;}
 function hexColor(){let c='#'+Math.floor(Math.random()*16777215).toString(16);hexResult.innerHTML='<div style="height:40px;background:'+c+'"></div>'+c;}
+
+
+function searchTools(){
+let input=document.getElementById("searchInput").value.toLowerCase();
+document.querySelectorAll(".card").forEach(card=>{
+let title=card.querySelector("h3")?.innerText.toLowerCase()||"";
+card.style.display=title.includes(input)?"block":"none";
+});
+}
+function cToF(){let c=parseFloat(document.getElementById("celsius").value)||0;document.getElementById("celsiusResult").innerText=((c*9/5)+32).toFixed(2)+" °F";}
+async function sha256Tool(){let text=document.getElementById("shaText").value;const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(text));const hash=[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");document.getElementById("shaResult").innerText=hash;}
+function kgToLb(){let kg=parseFloat(document.getElementById("kgInput").value)||0;document.getElementById("kgResult").innerText=(kg*2.20462).toFixed(2)+" LB";}
+function sortLines(){let lines=document.getElementById("sortText").value.split("\n").sort();document.getElementById("sortResult").innerText=lines.join("\n");}
+function trimSpaces(){let txt=document.getElementById("spaceText").value.replace(/\s+/g,' ').trim();document.getElementById("spaceResult").innerText=txt;}
 
 </script>
 
