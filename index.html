@@ -287,21 +287,38 @@ background:#020617;
 </style>
 
 
-<!-- SEO + Growth Enhancements -->
-<meta name="description" content="منصة أدوات مجانية تضم أدوات نصوص ومطورين وحاسبات وتحويلات مجانية.">
-<meta property="og:title" content="Free Tools Pro">
-<meta property="og:description" content="أكثر من 40 أداة مجانية تعمل داخل المتصفح">
+<style>
+.sidebar{position:fixed;right:0;top:0;width:220px;height:100%;background:#111827;color:#fff;padding:20px;overflow:auto;z-index:1000}
+.sidebar a{display:block;color:#fff;text-decoration:none;padding:10px;border-radius:8px;margin:6px 0}
+.sidebar a:hover{background:#2563eb}
+.main-wrap{margin-right:240px}
+.google-btn{display:inline-block;background:#fff;color:#111;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:bold}
+.hero-pro2{background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;padding:35px;border-radius:20px;text-align:center;margin:20px}
+@media(max-width:768px){.sidebar{position:relative;width:auto;height:auto}.main-wrap{margin-right:0}}
+</style>
 
 </head>
 
 <body>
-<section style="max-width:1100px;margin:20px auto;padding:30px;border-radius:20px;background:linear-gradient(135deg,#2563eb,#1e3a8a);color:white;text-align:center">
-<h1>🚀 Free Tools Pro</h1>
-<p>أدوات مجانية سريعة وآمنة تعمل مباشرة داخل المتصفح</p>
-<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-<span>40+ أداة</span><span>مجاني</span><span>بدون تسجيل</span><span>متوافق مع الهاتف</span>
+
+<div class="sidebar">
+<h2>🛠 Free Tools</h2>
+<a href="#">الرئيسية</a>
+<a href="#tools">أدوات النصوص</a>
+<a href="#tools">أدوات المطورين</a>
+<a href="#tools">الحاسبات</a>
+<a href="#tools">التحويلات</a>
+<a href="#">الأكثر استخداماً</a>
+<a href="#">من نحن</a>
+<a href="#">اتصل بنا</a>
+<hr>
+<a class="google-btn" href="#">تسجيل الدخول بجوجل</a>
 </div>
-</section>
+<div class="main-wrap">
+<div class="hero-pro2">
+<h1>🚀 Free Tools Pro</h1>
+<p>أدوات مجانية للمطورين والطلاب وصناع المحتوى</p>
+</div>
 
 
 <div class="hero-box">
@@ -769,31 +786,24 @@ function strongPass(){let c='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy
 function bytesToKb(){bytesResult.innerText=((parseFloat(bytesInput.value)||0)/1024).toFixed(2)+' KB';}
 function showTimestamp(){timestampResult.innerText=Math.floor(Date.now()/1000);}
 
+
+let sw=0,timer=null;
+function startSW(){if(!timer)timer=setInterval(()=>swResult.innerText=++sw,1000);}
+function stopSW(){clearInterval(timer);timer=null;}
+function validateJSON(){try{JSON.parse(jsonVal.value);jsonValResult.innerText='JSON صالح';}catch(e){jsonValResult.innerText='JSON غير صالح';}}
+function encodeHTMLTool(){htmlEncResult.innerText=htmlEnc.value.replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function decodeHTMLTool(){let t=document.createElement('textarea');t.innerHTML=htmlDec.value;htmlDecResult.innerText=t.value;}
+function vatCalc(){let p=parseFloat(vatPrice.value)||0;vatResult.innerText=(p*1.15).toFixed(2);}
+function barcodeGen(){barcodeResult.innerText='|||| '+barcodeText.value+' ||||';}
+
 </script>
 
-
-<section style="max-width:1000px;margin:20px auto;padding:20px">
-<h2>⭐ الأدوات الأكثر استخداماً</h2>
-<ul>
-<li>QR Code Generator</li>
-<li>Password Generator</li>
-<li>BMI Calculator</li>
-<li>Age Calculator</li>
-<li>JSON Formatter</li>
-<li>Word Counter</li>
-</ul>
-
-<h2>❓ الأسئلة الشائعة</h2>
-<p><b>هل الأدوات مجانية؟</b> نعم.</p>
-<p><b>هل يتم رفع البيانات؟</b> لا، معظم الأدوات تعمل داخل المتصفح.</p>
-
-<h2>📈 لماذا تستخدم الموقع؟</h2>
-<p>سرعة، سهولة، وعدم الحاجة إلى تثبيت برامج.</p>
-</section>
-
-<footer style='text-align:center;padding:25px'>
-<a href='privacy.html'>سياسة الخصوصية</a> |
-<a href='about.html'>من نحن</a> |
-<a href='contact.html'>اتصل بنا</a>
-</footer></body>
+</div>
+<div class="card"><h3>Stopwatch</h3><button onclick="startSW()">بدء</button><button onclick="stopSW()">إيقاف</button><div id="swResult">0</div></div>
+<div class="card"><h3>JSON Validator</h3><textarea id="jsonVal"></textarea><button onclick="validateJSON()">فحص</button><div id="jsonValResult"></div></div>
+<div class="card"><h3>HTML Encoder</h3><textarea id="htmlEnc"></textarea><button onclick="encodeHTMLTool()">تحويل</button><div id="htmlEncResult"></div></div>
+<div class="card"><h3>HTML Decoder</h3><textarea id="htmlDec"></textarea><button onclick="decodeHTMLTool()">فك</button><div id="htmlDecResult"></div></div>
+<div class="card"><h3>VAT Calculator</h3><input id="vatPrice"><button onclick="vatCalc()">احسب</button><div id="vatResult"></div></div>
+<div class="card"><h3>Barcode Text Generator</h3><input id="barcodeText"><button onclick="barcodeGen()">إنشاء</button><div id="barcodeResult"></div></div>
+</body>
 </html>
