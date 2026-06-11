@@ -279,9 +279,28 @@ background:#020617;
 .result{margin-top:10px;font-weight:bold;word-break:break-word}
 </style>
 
+
+<style>
+.tools-header{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px}
+.badge{background:#2563eb;color:#fff;padding:8px 14px;border-radius:20px}
+.hero-box{max-width:900px;margin:20px auto;padding:20px;border-radius:16px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);text-align:center}
+</style>
+
 </head>
 
 <body>
+
+<div class="hero-box">
+<h2>🚀 أكثر من 35 أداة مجانية</h2>
+<p>أدوات نصوص، حاسبات، تحويلات، وأدوات للمطورين تعمل مباشرة داخل المتصفح.</p>
+<div class="tools-header">
+<span class="badge">نصوص</span>
+<span class="badge">حاسبات</span>
+<span class="badge">تحويلات</span>
+<span class="badge">مطورين</span>
+</div>
+</div>
+
 
 <nav class="navbar">
 
@@ -467,6 +486,14 @@ background:#020617;
 <div class="card"><h3>مولد لون HEX</h3><button onclick="hexColorGen()">توليد</button><div id="hexGenResult" class="result"></div></div>
 <div class="card"><h3>حاسبة العمر</h3><input type="date" id="birthDate"><button onclick="ageCalc()">احسب</button><div id="ageResult" class="result"></div></div>
 <div class="card"><h3>تحويل CM إلى Inch</h3><input id="cmInput" placeholder="سم"><button onclick="cmToInch()">تحويل</button><div id="cmResult" class="result"></div></div>
+
+
+<div class="card"><h3>URL Encoder</h3><input id="urlText" placeholder="أدخل الرابط أو النص"><button onclick="urlEncode()">تحويل</button><div id="urlResult" class="result"></div></div>
+<div class="card"><h3>URL Decoder</h3><input id="urlDecodeText" placeholder="النص المشفر"><button onclick="urlDecode()">فك</button><div id="urlDecodeResult" class="result"></div></div>
+<div class="card"><h3>عداد الحروف</h3><textarea id="charText"></textarea><button onclick="charCount()">عد</button><div id="charResult" class="result"></div></div>
+<div class="card"><h3>مولد كلمة مرور قوية</h3><button onclick="strongPass()">إنشاء</button><div id="strongPassResult" class="result"></div></div>
+<div class="card"><h3>تحويل Bytes إلى KB</h3><input id="bytesInput"><button onclick="bytesToKb()">تحويل</button><div id="bytesResult" class="result"></div></div>
+<div class="card"><h3>Timestamp الآن</h3><button onclick="showTimestamp()">عرض</button><div id="timestampResult" class="result"></div></div>
 
 </section>
 
@@ -719,6 +746,14 @@ function upperCaseText(){upperResult.innerText=upperText.value.toUpperCase();}
 function hexColorGen(){let c='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');hexGenResult.innerHTML='<div style="height:30px;background:'+c+'"></div>'+c;}
 function ageCalc(){if(!birthDate.value)return;let d=new Date(birthDate.value);let age=new Date().getFullYear()-d.getFullYear();ageResult.innerText=age+' سنة';}
 function cmToInch(){cmResult.innerText=((parseFloat(cmInput.value)||0)/2.54).toFixed(2)+' inch';}
+
+
+function urlEncode(){urlResult.innerText=encodeURIComponent(urlText.value);}
+function urlDecode(){urlDecodeResult.innerText=decodeURIComponent(urlDecodeText.value);}
+function charCount(){charResult.innerText=charText.value.length+' حرف';}
+function strongPass(){let c='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';let p='';for(let i=0;i<16;i++)p+=c[Math.floor(Math.random()*c.length)];strongPassResult.innerText=p;}
+function bytesToKb(){bytesResult.innerText=((parseFloat(bytesInput.value)||0)/1024).toFixed(2)+' KB';}
+function showTimestamp(){timestampResult.innerText=Math.floor(Date.now()/1000);}
 
 </script>
 
