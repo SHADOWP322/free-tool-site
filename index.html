@@ -271,6 +271,14 @@ background:#020617;
 }
 
 </style>
+
+<style>
+.hero-badge{display:inline-block;padding:6px 12px;border-radius:20px;background:#eef;margin-bottom:10px}
+.card{transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.result{margin-top:10px;font-weight:bold;word-break:break-word}
+</style>
+
 </head>
 
 <body>
@@ -450,6 +458,15 @@ background:#020617;
 <div class="card"><h3>تحويل KG إلى LB</h3><input id="kgInput" placeholder="كيلوجرام"><button onclick="kgToLb()">تحويل</button><div id="kgResult" class="result"></div></div>
 <div class="card"><h3>ترتيب النص أبجدياً</h3><textarea id="sortText"></textarea><button onclick="sortLines()">ترتيب</button><div id="sortResult" class="result"></div></div>
 <div class="card"><h3>إزالة المسافات الزائدة</h3><textarea id="spaceText"></textarea><button onclick="trimSpaces()">تنظيف</button><div id="spaceResult" class="result"></div></div>
+
+
+<div class="card"><h3>حاسبة النسبة المئوية</h3><input id="percentNum" placeholder="الرقم"><input id="percentVal" placeholder="%"><button onclick="percentCalc()">احسب</button><div id="percentResult" class="result"></div></div>
+<div class="card"><h3>تحويل Fahrenheit إلى Celsius</h3><input id="fInput" placeholder="درجة فهرنهايت"><button onclick="fToC()">تحويل</button><div id="fResult" class="result"></div></div>
+<div class="card"><h3>عداد الكلمات</h3><textarea id="wordText"></textarea><button onclick="wordCount()">عد</button><div id="wordResult" class="result"></div></div>
+<div class="card"><h3>تحويل النص لأحرف كبيرة</h3><textarea id="upperText"></textarea><button onclick="upperCaseText()">تحويل</button><div id="upperResult" class="result"></div></div>
+<div class="card"><h3>مولد لون HEX</h3><button onclick="hexColorGen()">توليد</button><div id="hexGenResult" class="result"></div></div>
+<div class="card"><h3>حاسبة العمر</h3><input type="date" id="birthDate"><button onclick="ageCalc()">احسب</button><div id="ageResult" class="result"></div></div>
+<div class="card"><h3>تحويل CM إلى Inch</h3><input id="cmInput" placeholder="سم"><button onclick="cmToInch()">تحويل</button><div id="cmResult" class="result"></div></div>
 
 </section>
 
@@ -693,6 +710,15 @@ async function sha256Tool(){let text=document.getElementById("shaText").value;co
 function kgToLb(){let kg=parseFloat(document.getElementById("kgInput").value)||0;document.getElementById("kgResult").innerText=(kg*2.20462).toFixed(2)+" LB";}
 function sortLines(){let lines=document.getElementById("sortText").value.split("\n").sort();document.getElementById("sortResult").innerText=lines.join("\n");}
 function trimSpaces(){let txt=document.getElementById("spaceText").value.replace(/\s+/g,' ').trim();document.getElementById("spaceResult").innerText=txt;}
+
+
+function percentCalc(){let n=parseFloat(percentNum.value)||0;let p=parseFloat(percentVal.value)||0;percentResult.innerText=(n*p/100).toFixed(2);}
+function fToC(){let f=parseFloat(fInput.value)||0;fResult.innerText=((f-32)*5/9).toFixed(2)+' °C';}
+function wordCount(){wordResult.innerText=(wordText.value.trim()?wordText.value.trim().split(/\s+/).length:0)+' كلمة';}
+function upperCaseText(){upperResult.innerText=upperText.value.toUpperCase();}
+function hexColorGen(){let c='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');hexGenResult.innerHTML='<div style="height:30px;background:'+c+'"></div>'+c;}
+function ageCalc(){if(!birthDate.value)return;let d=new Date(birthDate.value);let age=new Date().getFullYear()-d.getFullYear();ageResult.innerText=age+' سنة';}
+function cmToInch(){cmResult.innerText=((parseFloat(cmInput.value)||0)/2.54).toFixed(2)+' inch';}
 
 </script>
 
